@@ -32,7 +32,7 @@ while True:
     if genre not in available_genres:
         print("\nGenre not found.")
         print("Available genres:")
-        
+
         for available_genre in sorted(available_genres):
             print(f"- {available_genre.title()}")
 
@@ -54,6 +54,22 @@ while True:
         print("Please enter a valid number.")
 
 
+while True:
+    try:
+        number_of_recommendations = int(
+            input("How many recommendations do you want? ")
+        )
+
+        if number_of_recommendations < 1:
+            print("Please enter a number greater than 0.")
+            continue
+
+        break
+
+    except ValueError:
+        print("Please enter a whole number.")
+
+
 recommendations = recommend_movies(
     movies,
     genre,
@@ -66,6 +82,15 @@ recommendations = sorted(
     key=lambda movie: movie["rating"],
     reverse=True
 )
+
+
+if len(recommendations) < number_of_recommendations:
+    print(
+        f"\nOnly {len(recommendations)} matching movies were found."
+    )
+
+
+recommendations = recommendations[:number_of_recommendations]
 
 
 print("\nRecommended Movies:\n")
