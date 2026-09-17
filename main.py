@@ -1,4 +1,6 @@
-from movies import movies
+from api import get_movies
+
+movies = get_movies()
 
 
 def recommend_movies(movies, genre, minimum_rating):
